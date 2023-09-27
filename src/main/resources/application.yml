@@ -1,0 +1,9 @@
+spring:
+  devtools:
+    livereload:
+      enabled: true
+  datasource:
+    url: jdbc:oracle:thin:@192.168.31.7:15211:XE
+    username: c##utlee
+    password: password1
+    driver-class-name: oracle.jdbc.driver.OracleDriver
