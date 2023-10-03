@@ -1,4 +1,4 @@
-import { Vue, extend } from 'vue'
+import { Vue } from 'vue'
 import LoginPage from '../../pages/LoginPage.vue'
 import { describe, it, expect } from "vitest";
 

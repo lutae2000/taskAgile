@@ -1,7 +1,16 @@
 import moxios from 'moxios'
-import registrationService from "../../services/registration"
 import {beforeEach, describe, afterEach, it, expect } from "vitest";
+import registrationService from '/@service/registration'
 
+// Adding Vue Router to the test so that
+// we can access vm.$router
+const localVue = createLocalVue()
+localVue.use(VueRouter)
+localVue.use(Vuelidate)
+const router = new VueRouter()
+
+// Mock dependency registratioService
+jest.mock('@/services/registration')
 describe('service/registration', () => {
     beforeEach(() => {
         moxios.install()

@@ -1,9 +1,10 @@
 import {beforeEach, describe, it, expect } from "vitest";
-import RegisterPage from "../../pages/RegisterPage.vue";
+import RegisterPage from "/@pages/RegisterPage.vue";
 import { mount } from '@vue/test-utils'
+import Vue from 'vue'
 
 // describe('RegisterPage.vue', () => {
-//     it('should rneder correct contents', () =>{
+//     it('should reneder correct contents', () =>{
 //         const Constructor = Vue.extend(RegisterPage);
 //         const vm = new Constructor().$mount();
 //         expect(vm.$el.querySelector('.logo').getAttribute('src'))
@@ -59,5 +60,20 @@ describe('RegisterPage.vue', () => {
         expect(fieldUsername.element.value).toEqual(username)
         expect(fieldEmailAddress.element.value).toEqual(emailAddress)
         expect(fieldPassword.element.value).toEqual(password)
+    })
+
+    it('should have form submit event handler `submitForm`', () => {
+        const stub = jest.fn()
+        wrapper.setMethods({submitForm: stub})
+        buttonSubmit.trigger('submit')
+        expect(stub).toBeCalled()
+    })
+
+    it('should fail when the email address is invalid', () => {
+        wrapper.vm.form.username = 'test'
+        wrapper.vm.form.emailAddress = 'bad-email-address'
+        wrapper.vm.form.password = 'JestRocks!'
+        wrapper.vm.submitForm()
+        expect(registerSpy).not.toHaveBeenCalled()
     })
 })

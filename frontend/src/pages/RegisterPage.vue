@@ -21,20 +21,26 @@
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" v-model="form.password">
           </div>
-          <button type="submit" class="btn btn-primary btn-block"></button>
+          <button type="submit" class="btn btn-primary btn-block">Create account</button>
         </form>
 
       </div>
     </div>
     <footer class="footer">
-      <span class="copyright"></span>
-      <ul class="footer-links list-inline float-right"></ul>
+      <span class="copyright">&copy; 2023 TaskAgile.com</span>
+      <ul class="footer-links list-inline float-right">
+        <li class="list-inline-item"><a href="#">About</a></li>
+        <li class="list-inline-item"><a href="#">Terms of Service</a></li>
+        <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+        <li class="list-inline-item"><a href="https://github.com/taskagile/vuejs.spring-boot.mysql" target="_blank">GitHub</a></li>
+      </ul>
     </footer>
   </div>
 </template>
 
 <script>
-import registration from "../services/registration";
+import registration from "/@services/registration";
+import { required, email, minLength, maxLength, alphaNum } from 'vuelidate/lib/validators'
 
 export default {
   name: 'RegisterPage',
@@ -48,9 +54,33 @@ export default {
       errorMessage: '',
     }
   },
+  validations:{
+    form:{
+      username: {
+        required,
+        minLength: minLength(2),
+        maxLength: maxLength(50),
+        alphaNum
+      },
+      emailAddress: {
+        required,
+        email,
+        maxLength: maxLength(100)
+      },
+      password:{
+        required,
+        minLength: minLength(2),
+        maxLength: maxLength(50),
+      }
+    }
+  },
   methods:{
     submitForm(){
-      registration.register(this.form).then(() => {
+      this.$v.$touch()
+      if(this.$v.$invalid){
+        return
+      }
+        registration.register(this.form).then(() => {
         this.$router.push({name: 'LoginPage'})
       }).catch((error) => {
         this.errorMessage = 'Failed to register user Reason:' + (error.message ? error.message : 'Unknown') + '.'
@@ -114,5 +144,4 @@ export default {
     color: #666;
   }
 }
-
 </style>
