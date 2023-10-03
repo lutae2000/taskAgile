@@ -11,17 +11,21 @@ const name = ref(App);
   </div>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<style lang="scss">
+html {
+  font-size: 14px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.form-group {
+  .error {
+    line-height: 1;
+    display: none;
+    margin-top: 5px;
+  }
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.field-error {
+  .error {
+    display: block;
+    color: #ff0000;
+  }
 }
 </style>

@@ -1,5 +1,6 @@
-import Vue from 'vue'
-import LoginPage from '../pages/LoginPage.vue'
+import { Vue, extend } from 'vue'
+import LoginPage from '../../pages/LoginPage.vue'
+import { describe, it, expect } from "vitest";
 
 describe('LoginPage.vue', () => {
     it('should render correct contents', () => {
